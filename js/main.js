@@ -27,14 +27,14 @@ function renderPokemon(pokemons, elRegExp){
         const clonedTemplate = elTemplate.cloneNode(true);
         clonedTemplate.querySelector(".pokemon-num").textContent = item.num;
         clonedTemplate.querySelector(".pokemon-image").src = item.img;
-
+        
         // if(elRegExp.source !== "(?:)" && elRegExp){
         //     clonedTemplate.querySelector(".pokemon-name").innerHTML = item.name.replace(elRegExp,`<mark class="p-0 bg-warning">${elRegExp.source}</mark>`);
         // }else{
-        //     clonedTemplate.querySelector(".pokemon-name").textContent = item.name;
         // }
-
-
+        clonedTemplate.querySelector(".pokemon-name").textContent = item.name;
+        
+        
         clonedTemplate.querySelector(".pokemon-weight").textContent = item.weight;
         clonedTemplate.querySelector(".pokemon-height").textContent = item.height;
         clonedTemplate.querySelector(".pokemon-candy-count").textContent = item.candy_count;
@@ -75,13 +75,13 @@ elForm.addEventListener("keyup", function(evt){
     evt.preventDefault();
     const elSearchInputValue = elSearchInput.value.trim();
     const elRegExp = new RegExp(elSearchInputValue, "gi")
-
+    
     
     let findPoke = pokemons.filter(item =>{
         return item.name.match(elRegExp)
     })
     
-    renderPokemon(findPoke, elRegExp)
+    renderPokemon(findPoke, elRegExp.source)
 })
 
 // Select Pokemon type
