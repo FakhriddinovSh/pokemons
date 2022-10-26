@@ -136,11 +136,11 @@ sortAlphabet();
 function sortWeight() {
     elSortWeight.addEventListener("click", function (evt) {
         if (evt.target.value == "heavy") {
-            let sortitem = pokemons.sort((a, b) => a.weight - b.weight);
+            let sortitem = pokemons.sort((a, b) => b.weight - a.weight);
             renderPokemon(sortitem);
         }
         if (evt.target.value == "light") {
-            let sortitem = pokemons.sort((a, b) => b.weight - a.weight);
+            let sortitem = pokemons.sort((a, b) => a.weight - b.weight);
             renderPokemon(sortitem);
         }
     });
