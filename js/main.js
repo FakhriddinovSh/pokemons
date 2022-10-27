@@ -21,18 +21,18 @@ const elModalWeaknesses = document.querySelector(".pokemon-weaknesses ")
 const pokemonTypeArr = [];
 
 // Render Pokemon
-function renderPokemon(pokemons, elRegExp){
+function renderPokemon(pokemons, elRegExp = ""){
     elList.innerHTML = "";
     for (const item of pokemons) {
         const clonedTemplate = elTemplate.cloneNode(true);
         clonedTemplate.querySelector(".pokemon-num").textContent = item.num;
         clonedTemplate.querySelector(".pokemon-image").src = item.img;
         
-        // if(elRegExp.source !== "(?:)" && elRegExp){
-        //     clonedTemplate.querySelector(".pokemon-name").innerHTML = item.name.replace(elRegExp,`<mark class="p-0 bg-warning">${elRegExp.source}</mark>`);
-        // }else{
-        // }
-        clonedTemplate.querySelector(".pokemon-name").textContent = item.name;
+        if(elRegExp.source !== "(?:)" && elRegExp){
+            clonedTemplate.querySelector(".pokemon-name").innerHTML = item.name.replace(elRegExp,`<mark class="p-0 bg-warning">${elRegExp.source}</mark>`);
+        }else{
+            clonedTemplate.querySelector(".pokemon-name").textContent = item.name;
+        }
         
         
         clonedTemplate.querySelector(".pokemon-weight").textContent = item.weight;
@@ -71,7 +71,7 @@ elList.addEventListener("click", function(evt){
 
 
 // Search Pokemons
-elForm.addEventListener("keyup", function(evt){
+elForm.addEventListener("submit", function(evt){
     evt.preventDefault();
     const elSearchInputValue = elSearchInput.value.trim();
     const elRegExp = new RegExp(elSearchInputValue, "gi")
@@ -81,7 +81,7 @@ elForm.addEventListener("keyup", function(evt){
         return item.name.match(elRegExp)
     })
     
-    renderPokemon(findPoke, elRegExp.source)
+    renderPokemon(findPoke, elRegExp)
 })
 
 // Select Pokemon type
